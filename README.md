@@ -5,19 +5,57 @@ This code provides is an implementation of CREST in python. CREST is a novel cov
 This code also provides the implementation of the CSP-CTP algorithm and the DRM-ST algorithm that together make the CREST algorithm. Next is a brief description of each algorithm and how to use it.  
 
 ### CREST()
-The input data should be of the format [number of frequency bands, number of epochs, number of channels, time samples]. Note that even if you plan to apply this on a single frequency band, your input data should be of the shape [1, number of epochs, number of channels, time samples]. Also, two data structures pertaining to classes 1 and 2 should be separately given as input. 
+The input data should be of the format [number of frequency bands, number of trials, number of channels, time samples] where number of freueny bands specifies the number of bandpass filters where the data was filtered with. Note that even if you plan to apply this on a single frequency band, your input data should be of the shape [1, number of epochs, number of channels, time samples]. Also, two data structures pertaining to train or test data for classes 1 and 2 should be separately given as input. 
 
-Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, you can simply balance it multiple times by randomly subsampling the larger class. You can then run the code on balanced classes and take the average. 
+Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, it is recommended that you simply balance the classes by randomly subsampling the larger class. To minimize loosing data, you can perform balancing multiple times and run the code and then take the average. 
 
-The default parameters when calling `CREST()` considers 3 CSP and CTP filters for each class and distance for 
+Output measures come in two formats: classification accuracy and AUC. 
 
-### CSP_CTP()
+The default parameters when calling `CREST()` are `numFilt=3', 
 
-### DRM_ST()
+```python
+from CREST import CREST # CREST.py and its accompanying files should be in your directory 
 
+# call CREST with the default parameters
+crest = CREST(numFilt=3, dist_measure='riem')    
 
-### Reference 
+# train_data_1 and train_data_2 contain the training data belonging to classes 1 and 2 each with the following format: 
+# [number of frequency bands, number of trials, number of channels, time samples]
+crest.train(train_data_1, train_data_2)
+
+# test_data_1 and test_data_2 contain the test data belonging to classes 1 and 2 each with the following format: 
+# [number of frequency bands, number of trials, number of channels, time samples]
+acc_rate = crest.accuracy(test_data_1, test_data_2)
+```
+
+### CSP_CTP() and DRM_ST()
+
+These two algorithms are the building blocks of CREST and are also provided as stand-alone classes.
+The functions `train`, `accuracy` and `AUC` can similarly be applied to train the classifiers or measure the performance:
+
+```python
+from CREST import CSP_CTP
+
+csp_ctp = CSP_CTP(numFilt=3)   
+csp_ctp.train(train_data_1, train_data_2)
+acc_rate = csp_ctp.accuracy(test_data_1, test_data_2)
+```
+
+```python
+from CREST import DRM_ST
+
+drm_st = DRM_ST(dist_measure='riem')
+drm_st.train(train_data_1, train_data_2)
+auc_rate = drm_st.AUC(test_data_1, test_data_2)
+```
+
+### Citation
 
 If you use this code, please cite the following paper:
 
 M. Mousavi and V. R. de Sa, "Spatio-temporal analysis of error-related brain activity in active and passive brain–computer interfaces,” BRAIN-COMPUTER INTERFACES, 2019, VOL. 6, NO. 4, 118–127. https://doi.org/10.1080/2326263X.2019.1671040
+
+### Questions/Comments 
+Please send any questions or comments to mahta@ucsd.edu or mahta.mousavi@gmail.com
+
+Thank you! 
