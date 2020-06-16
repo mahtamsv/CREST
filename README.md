@@ -4,7 +4,7 @@ This code provides is an implementation of CREST in python. CREST is a novel cov
 
 This code also provides the implementation of the CSP-CTP algorithm and the DRM-ST algorithm that together make the CREST algorithm. Next is a brief description of each algorithm and how to use it.  
 
-Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, it is recommended that you simply balance the classes by randomly subsampling the larger class. To minimize loosing data, you can perform balancing multiple times and run the code and then take the average. 
+Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, the code will not encounter any errors but the interpretation of the results may be difficult. Therefore, it is recommended that you simply balance the classes by randomly subsampling the larger class. To minimize loosing data, you can perform balancing multiple times and run the code and then take the average. 
 
 
 ### CREST()
