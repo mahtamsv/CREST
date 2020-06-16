@@ -4,10 +4,11 @@ This code provides is an implementation of CREST in python. CREST is a novel cov
 
 This code also provides the implementation of the CSP-CTP algorithm and the DRM-ST algorithm that together make the CREST algorithm. Next is a brief description of each algorithm and how to use it.  
 
+Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, it is recommended that you simply balance the classes by randomly subsampling the larger class. To minimize loosing data, you can perform balancing multiple times and run the code and then take the average. 
+
+
 ### CREST()
 The input data should be of the format [number of frequency bands, number of trials, number of channels, time samples] where number of freueny bands specifies the number of bandpass filters where the data was filtered with. Note that even if you plan to apply this on a single frequency band, your input data should be of the shape [1, number of epochs, number of channels, time samples]. Also, two data structures pertaining to train or test data for classes 1 and 2 should be separately given as input. 
-
-Please note that the code does not perform any extra steps to accomodate for unbalanced train or test input datasets. If you have unbalanced datasets, it is recommended that you simply balance the classes by randomly subsampling the larger class. To minimize loosing data, you can perform balancing multiple times and run the code and then take the average. 
 
 Output measures come in two formats: classification accuracy and AUC. 
 
