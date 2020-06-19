@@ -12,7 +12,7 @@ The input data should be of the format [number of frequency bands, number of tri
 
 Output measures come in two formats: classification accuracy and AUC. 
 
-The default parameters for CREST are `CREST(numFilt=3, dist_measure='riem',logreg_solver='liblinear')` where `numFilt` indicates the number of CSP and CTP filters for each class, `dist_measure` indicates the distance measure which can be either 'riem' or 'log-eucl', and the solver for the logistic regression which is liblinear by default. 
+The default parameters for CREST are `CREST(numFilt=3, dist_measure='riem',logreg_solver='liblinear')` where `numFilt` indicates the number of CSP and CTP filters for each class (should be at least 2 and at most half of the number of channels), `dist_measure` indicates the distance measure which can be either 'riem' or 'log-eucl', and the solver for the logistic regression which is liblinear by default. 
 
 You can change the solver to any of the available solvers for logistic regression in scikit-learn: ‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’}. See this link for more information: 
 
